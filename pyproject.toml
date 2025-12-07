@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pixly"
+version = "0.1.0"
+description = "Pixly: Screenshots, Organized Intelligently - AI-powered screenshot organization"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Pixly Team"}
+]
+keywords = ["screenshot", "organization", "ocr", "ai", "gemini", "pixly"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Desktop Environment :: File Managers",
+]
+
+dependencies = [
+    "watchdog>=3.0.0",
+    "pytesseract>=0.3.10",
+    "Pillow>=10.0.0",
+    "google-generativeai>=0.3.0",
+    "imagehash>=4.3.0",
+    "flask>=3.0.0",
+    "pyyaml>=6.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "hypothesis>=6.90.0",
+]
+
+[project.scripts]
+pixly = "pixly.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/pixly/pixly"
+Documentation = "https://github.com/pixly/pixly#readme"
+Repository = "https://github.com/pixly/pixly"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pixly*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["pixly"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
